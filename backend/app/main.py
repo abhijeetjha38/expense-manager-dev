@@ -11,6 +11,7 @@ from app.database import Base, engine
 
 # Import models so they are registered with Base.metadata before create_all
 from app.modules.auth import models as _auth_models  # noqa: F401
+from app.modules.auth.router import router as auth_router
 
 
 @asynccontextmanager
@@ -45,6 +46,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# ---------------------------------------------------------------------------
+# Routers
+# ---------------------------------------------------------------------------
+app.include_router(auth_router)
 
 
 # ---------------------------------------------------------------------------
